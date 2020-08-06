@@ -142,7 +142,7 @@ namespace NoesisGUI.MonoGameWrapper.Input.Devices
 
         private bool IsIgnored(Keys key)
         {
-            var focused = this.noesisKeyboard.GetFocused();
+            var focused = this.noesisKeyboard.FocusedElement;
             if (focused == null
                 || focused is FrameworkElement frameworkElement
                 && !frameworkElement.IsLoaded)
@@ -222,7 +222,7 @@ namespace NoesisGUI.MonoGameWrapper.Input.Devices
 
         private void TryConsumeKey(Keys key)
         {
-            var focused = this.noesisKeyboard.GetFocused();
+            var focused = this.noesisKeyboard.FocusedElement;
             if (focused == null)
             {
                 return;

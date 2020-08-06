@@ -33,7 +33,7 @@
 
         private InputManager inputManager;
 
-        private Sizei lastSize;
+        private Size lastSize;
 
         private NoesisProviderManager providerManager;
 
@@ -55,7 +55,7 @@
             this.gameWindow = config.GameWindow;
 
             // setup Noesis Debug callbacks
-            Log.LogCallback = this.NoesisLogCallbackHandler;
+            Log.SetLogCallback(this.NoesisLogCallbackHandler);
 
             this.graphicsDevice = config.Graphics.GraphicsDevice;
             this.providerManager = config.NoesisProviderManager;
@@ -210,7 +210,7 @@
         private void RefreshSize()
         {
             var viewport = this.graphicsDevice.Viewport;
-            var size = new Sizei((uint)viewport.Width, (uint)viewport.Height);
+            var size = new Size((uint)viewport.Width, (uint)viewport.Height);
             if (this.lastSize == size)
             {
                 return;

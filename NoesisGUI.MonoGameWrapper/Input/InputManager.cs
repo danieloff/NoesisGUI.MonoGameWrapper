@@ -35,7 +35,7 @@
             while (VisualTreeHelper.GetParent(rootVisual) is var parent
                    && parent != null)
             {
-                rootVisual = parent;
+                rootVisual = (Visual)parent;
             }
 
             this.mouse = new Mouse(view, rootVisual, controlTreeRoot, config);

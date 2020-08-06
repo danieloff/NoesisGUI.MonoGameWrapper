@@ -1,4 +1,4 @@
-﻿namespace NoesisGUI.MonoGameWrapper.Helpers.DeviceState
+namespace NoesisGUI.MonoGameWrapper.Helpers.DeviceState
 {
     #region
 
@@ -24,7 +24,7 @@
 
         private readonly int[] vbStride = new int[1];
 
-        private Color4 blendFactor;
+        private SharpDX.Mathematics.Interop.RawColor4 blendFactor;
 
         private BlendState blendState;
 
@@ -54,13 +54,13 @@
 
         private int sampleMaskRef;
 
-        private Rectangle[] scissorRectangles;
+        private SharpDX.Mathematics.Interop.RawRectangle[] scissorRectangles;
 
         private int stencilRefRef;
 
         private PrimitiveTopology topology;
 
-        private ViewportF[] viewports;
+        private SharpDX.Mathematics.Interop.RawViewportF[] viewports;
 
         private VertexShader vs;
 
@@ -81,7 +81,7 @@
             context.InputAssembler.PrimitiveTopology = this.topology;
             context.InputAssembler.InputLayout = this.layout;
             context.Rasterizer.SetViewports(this.viewports);
-            context.Rasterizer.SetScissorRectangles(this.scissorRectangles);
+            //context.Rasterizer.SetScissorRectangles(this.scissorRectangles);
             context.Rasterizer.State = this.rasterizerState;
             context.OutputMerger.SetBlendState(this.blendState, this.blendFactor, this.sampleMaskRef);
             context.OutputMerger.SetDepthStencilState(this.depthState, this.stencilRefRef);
@@ -110,8 +110,8 @@
             var context = this.device.ImmediateContext;
             this.topology = context.InputAssembler.PrimitiveTopology;
             this.layout = context.InputAssembler.InputLayout;
-            this.viewports = context.Rasterizer.GetViewports();
-            this.scissorRectangles = context.Rasterizer.GetScissorRectangles();
+            this.viewports = context.Rasterizer.GetViewports<SharpDX.Mathematics.Interop.RawViewportF>();
+            //this.scissorRectangles = context.Rasterizer.GetScissorRectangles<SharpDX.Mathematics.Interop.RawRectangle>();
             this.rasterizerState = context.Rasterizer.State;
             this.blendState = context.OutputMerger.GetBlendState(out this.blendFactor, out this.sampleMaskRef);
             this.depthState = context.OutputMerger.GetDepthStencilState(out this.stencilRefRef);

@@ -22,11 +22,11 @@
 
         private TimeSpan lastUpdateTotalGameTime;
 
-        private View.TessellationQuality quality = View.TessellationQuality.High;
+        private TessellationMaxPixelError quality = TessellationMaxPixelError.HighQuality;
 
-        private View.RenderFlags renderFlags;
+        private RenderFlags renderFlags;
 
-        private Sizei size;
+        private Size size;
 
         private View view;
 
@@ -77,15 +77,15 @@
         /// <summary>
         /// Gets or sets the tesselation quality.
         /// </summary>
-        public View.TessellationQuality Quality
+        public TessellationMaxPixelError Quality
         {
             get => this.quality;
             set
             {
-                if (this.quality == value)
+                /*//FIXME if (this.quality == value)
                 {
                     return;
-                }
+                }*/
 
                 this.quality = value;
                 this.ApplyQualitySetting();
@@ -95,7 +95,7 @@
         /// <summary>
         /// Gets or sets the render flags.
         /// </summary>
-        public View.RenderFlags RenderFlags
+        public RenderFlags RenderFlags
         {
             get => this.renderFlags;
             set
@@ -112,7 +112,7 @@
 
         public void ApplyAntiAliasingSetting()
         {
-            this.view?.SetIsPPAAEnabled(this.IsPPAAEnabled);
+            //FIXME this.view?.SetIsPPAAEnabled(this.IsPPAAEnabled);
         }
 
         public InputManager CreateInputManager(NoesisConfig config)
@@ -128,10 +128,11 @@
         public void PreRender()
         {
             this.renderer.UpdateRenderTree();
-            if (!this.renderer.NeedsOffscreen())
+            
+            /*if (!Noesis.Renderer.NeedsOffscreen())
             {
                 return;
-            }
+            }*/
 
             using (this.deviceState.Remember())
             {
@@ -149,7 +150,7 @@
 
         public void SetSize(ushort width, ushort height)
         {
-            this.size = new Sizei(width, height);
+            this.size = new Size(width, height);
             this.view.SetSize(width, height);
             this.view.Update(this.lastUpdateTotalGameTime.TotalSeconds);
         }
@@ -185,7 +186,7 @@
 
         private void ApplyQualitySetting()
         {
-            this.view?.SetTessellationQuality(this.quality);
+            this.view?.SetTessellationMaxPixelError(this.quality);
         }
 
         private void ApplyRenderingFlagsSetting()

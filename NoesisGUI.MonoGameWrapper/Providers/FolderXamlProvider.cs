@@ -8,7 +8,7 @@
     {
         private readonly string rootPath;
 
-        public FolderXamlProvider(string rootPath)
+        public FolderXamlProvider(string rootPath) : base()
         {
             if (!rootPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
             {

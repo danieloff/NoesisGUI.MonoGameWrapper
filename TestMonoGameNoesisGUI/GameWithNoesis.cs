@@ -22,7 +22,7 @@
         #region Constants
 
         // You can try enabling the fullscreen mode here.
-        private const bool SettingIsFullscreen = true;
+        private const bool SettingIsFullscreen = false;//true;
 
         // If you want to try the hardware fullscreen mode, you can enable it here.
         // Please note that it has some issues in MonoGame 3.6 and not recommended.
@@ -68,6 +68,9 @@
                 Color.CornflowerBlue,
                 1,
                 0);
+            /*context.Rasterizer.SetViewport(new Viewport(0, 0, form.ClientSize.Width, form.ClientSize.Height, 0.0f, 1.0f));
+            context.OutputMerger.SetTargets(renderView);
+            context.ClearRenderTargetView(renderView, Color.Black);*/
 
             // TODO: Add your drawing code here
 
@@ -178,8 +181,8 @@
                 this.Window,
                 this.graphics,
                 providerManager,
-                rootXamlFilePath: "Samples/TextBox.xaml",
-                themeXamlFilePath: null,
+                rootXamlFilePath: "Grid.xaml", //"../Data_old/Samples/TextBox.xaml", //"TextBox.xaml",
+                themeXamlFilePath: "Theme/NoesisTheme.DarkBlue.xaml",
                 // uncomment this line to use theme file
                 //themeXamlFilePath: "Themes/WindowsStyle.xaml",
                 currentTotalGameTime: this.lastUpdateTotalGameTime);
@@ -187,7 +190,16 @@
             config.SetupInputFromWindows();
 
             this.noesisWrapper = new NoesisWrapper(config);
-            this.noesisWrapper.View.IsPPAAEnabled = true;
+            //this.noesisWrapper.View.IsPPAAEnabled = true;
+
+
+            this.noesisWrapper.View.GetView().SetFlags(Noesis.RenderFlags.PPAA | Noesis.RenderFlags.LCD);
+
+            string[] fonts = new string[] { "Theme/Fonts/#PT Root UI", "Arial", "Segoe UI Emoji" };
+
+            Noesis.GUI.LoadApplicationResources("Theme/NoesisTheme.DarkBlue.xaml");
+            Noesis.GUI.SetFontFallbacks(fonts);
+            Noesis.GUI.SetFontDefaultProperties(15, Noesis.FontWeight.Normal, Noesis.FontStretch.Normal, Noesis.FontStyle.Normal);
         }
 
         private void DestroyNoesisGUI()
@@ -205,8 +217,9 @@
         // So we have to manually refresh the backbuffer size every frame.
         private void RefreshBackbufferSize()
         {
+            /*
             if (this.graphics.HardwareModeSwitch
-                && this.graphics.IsFullScreen)
+                 && this.graphics.IsFullScreen)
             {
                 // don't refresh the backbuffer size automatically in fullscreen hardware mode
                 return;
@@ -222,6 +235,8 @@
             this.graphics.PreferredBackBufferWidth = bounds.Width;
             this.graphics.PreferredBackBufferHeight = bounds.Height;
             this.graphics.ApplyChanges();
+            */
+            
         }
 
         #endregion

@@ -3,6 +3,15 @@
     using System;
     using Noesis;
 
+    public class Provider
+    {
+        public XamlProvider XamlProvider;
+
+        public FontProvider FontProvider;
+
+        public TextureProvider TextureProvider;
+    }
+
     public class NoesisProviderManager : IDisposable
     {
         private Provider provider;

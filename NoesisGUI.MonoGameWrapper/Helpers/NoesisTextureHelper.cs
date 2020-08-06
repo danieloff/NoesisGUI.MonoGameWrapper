@@ -43,7 +43,7 @@
                 texture.Width,
                 texture.Height,
                 texture.LevelCount,
-                format: GetTextureFormat(texture),
+                //FIXME format: GetTextureFormat(texture),
                 isInverted: false);
         }
 
@@ -51,7 +51,7 @@
 
         #region Methods
 
-        private static Texture.Format GetTextureFormat(Texture2D texture)
+        /* FIXME private static Texture.Format GetTextureFormat(Texture2D texture)
         {
             switch (texture.Format)
             {
@@ -75,7 +75,7 @@
             }
 
             throw new ArgumentOutOfRangeException("Unknown texture format: " + texture.Format);
-        }
+        } */
 
         #endregion
     }
